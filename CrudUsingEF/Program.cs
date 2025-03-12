@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-
+using CrudUsingEF.Repository;
 namespace CrudUsingEF
 {
     public class Program
@@ -15,7 +15,9 @@ namespace CrudUsingEF
             //builder.Services.AddDbContext<AppDbContext>(options =>
             //    options.UseSqlServer("Server=ANIK-DEB\\SQLEXPRESS;Database=MyAppDb;Trusted_Connection=True;Encrypt=False"));
             builder.Services.AddDbContext<AppDbContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             var app = builder.Build();
 
